@@ -1,0 +1,58 @@
+<img height="500"
+    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F1bd9f911554e2f4328cb00ee9558c793384fe0133abb-RWCPsT_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1630480917&t=e21826bf75339fc9ea49ab03db249aa4"
+    data="./imgs/1.jpg" alt="">
+<hr />
+<img height="500"
+    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F1bd9f911554e2f4328cb00ee9558c793384fe0133abb-RWCPsT_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1630480917&t=e21826bf75339fc9ea49ab03db249aa4"
+    data="./imgs/2.jpg" alt="">
+<hr />
+<img height="500"
+    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F1bd9f911554e2f4328cb00ee9558c793384fe0133abb-RWCPsT_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1630480917&t=e21826bf75339fc9ea49ab03db249aa4"
+    data="./imgs/3.jpg" alt="">
+<hr />
+<img height="500"
+    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F1bd9f911554e2f4328cb00ee9558c793384fe0133abb-RWCPsT_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1630480917&t=e21826bf75339fc9ea49ab03db249aa4"
+    data="./imgs/4.jpg" alt="">
+<hr />
+<img height="500"
+    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F1bd9f911554e2f4328cb00ee9558c793384fe0133abb-RWCPsT_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1630480917&t=e21826bf75339fc9ea49ab03db249aa4"
+    data="./imgs/5.jpg" alt="">
+<hr />
+
+<script>
+    let t = null;
+    function lazyload() {
+        // if (t) return
+        if (t) clearTimeout(t);
+        t = setTimeout(() => {
+            // 3、发现滚动
+            //     3.1 计算可视区域总高度
+            //         公式1：window.innerHeight  浏览器窗口的视口的高度
+            //         公式2：window.innerHeight + document.documentElement.scrollTop
+            //               浏览器窗口的视口的高度 + 当前滚动条滚动条的高度
+            let h1 = window.innerHeight || document.documentElement.clientHeight;
+            let h2 = document.documentElement.scrollTop || document.body.scrollTop;
+            let showTotalHeight = h1 + h2;
+            //     3.2 获取所有图片
+            let imgs = document.querySelectorAll('img'); 
+            //     3.3 遍历
+            imgs.forEach((item, index) => {
+                // 3.4 判断当前图片到网页左上角的距离 <= 计算可视区域总高度 ？？？
+                let imgTop = item.offsetTop;
+                // showTotalHeight
+                if (imgTop <= showTotalHeight) {
+                    item.src = item.getAttribute('data');
+                }
+            });
+            // 如果节流
+            // t = null;
+        }, 500);
+    }
+    // 1、显示图片 src写loading、data写真实地址
+    // 2、监控滚动条滚动  window.onscroll
+    window.onscroll = lazyload;
+    lazyload();
+    // <img data="" test=""/>  
+    // 在HTML中叫标签  src class、id等属性 
+    // 在js中叫标签对象  标签对象.src/className/id   留心自定义的只能调用 getAttribute
+</script>
